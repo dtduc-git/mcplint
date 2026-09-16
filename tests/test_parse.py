@@ -1,5 +1,7 @@
 from pathlib import Path
 
+import pytest
+
 from mcplint.parse import parse_config_file, strip_jsonc
 
 FIXTURES = Path(__file__).resolve().parent.parent / "fixtures"
@@ -84,3 +86,40 @@ def test_nested_configs_are_discovered(tmp_path: Path) -> None:
     assert ".mcp.json" in names
     assert "mcp.json" in names
     assert all("node_modules" not in str(path) for path in configs)
+
+
+@pytest.mark.parametrize(
+    "prefix",
+    [
+        "Library/Application Support/Code",
+        "Library/Application Support/Cursor",
+        ".config/Code",
+        ".config/Cursor",
+        "AppData/Roaming/Code",
+        "AppData/Roaming/Cursor",
+    ],
+)
+def test_cline_home_config_is_discovered_and_parsed(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, prefix: str
+) -> None:
+    from mcplint.discovery import discover
+
+    monkeypatch.setenv("HOME", str(tmp_path))
+    monkeypatch.setenv("USERPROFILE", str(tmp_path))
+    path = (
+        tmp_path
+        / prefix
+        / "User/globalStorage/saoudrizwan.claude-dev/settings/cline_mcp_settings.json"
+    )
+    path.parent.mkdir(parents=True)
+    path.write_text(
+        '{"mcpServers": {"demo": {"command": "npx", "args": ["demo@1.0.0"]}}}',
+        encoding="utf-8",
+    )
+
+    configs, _ = discover([], include_home=True)
+    assert path in configs
+    config = parse_config_file(path)
+    assert config is not None
+    assert config.client == "cline"
+    assert config.servers[0].name == "demo"

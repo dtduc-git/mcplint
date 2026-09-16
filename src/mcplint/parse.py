@@ -55,6 +55,8 @@ def strip_jsonc(text: str) -> str:
 def guess_client(path: Path) -> str:
     posix = path.as_posix()
     name = path.name.lower()
+    if name == "cline_mcp_settings.json":
+        return "cline"
     if ".cursor/" in posix:
         return "cursor"
     if "windsurf" in posix:

@@ -16,8 +16,16 @@ REPO_CONFIGS: list[tuple[str, str]] = [
     (".codex/config.toml", "codex"),
 ]
 
+CLINE_CONFIG = "User/globalStorage/saoudrizwan.claude-dev/settings/cline_mcp_settings.json"
+
 HOME_CONFIGS: list[tuple[str, str]] = [
     ("~/.cursor/mcp.json", "cursor"),
+    (f"~/Library/Application Support/Code/{CLINE_CONFIG}", "cline"),
+    (f"~/Library/Application Support/Cursor/{CLINE_CONFIG}", "cline"),
+    (f"~/.config/Code/{CLINE_CONFIG}", "cline"),
+    (f"~/.config/Cursor/{CLINE_CONFIG}", "cline"),
+    (f"~/AppData/Roaming/Code/{CLINE_CONFIG}", "cline"),
+    (f"~/AppData/Roaming/Cursor/{CLINE_CONFIG}", "cline"),
     ("~/.codeium/windsurf/mcp_config.json", "windsurf"),
     ("~/.codex/config.toml", "codex"),
     ("~/.gemini/settings.json", "gemini"),
