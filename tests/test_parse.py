@@ -123,3 +123,22 @@ def test_cline_home_config_is_discovered_and_parsed(
     assert config is not None
     assert config.client == "cline"
     assert config.servers[0].name == "demo"
+
+
+def test_cline_shared_home_config_is_discovered_and_parsed(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    from mcplint.discovery import discover
+
+    monkeypatch.setenv("HOME", str(tmp_path))
+    monkeypatch.setenv("USERPROFILE", str(tmp_path))
+    path = tmp_path / ".cline/data/settings/cline_mcp_settings.json"
+    path.parent.mkdir(parents=True)
+    path.write_text('{"mcpServers": {"demo": {"command": "npx"}}}', encoding="utf-8")
+
+    configs, _ = discover([], include_home=True)
+    assert path in configs
+    config = parse_config_file(path)
+    assert config is not None
+    assert config.client == "cline"
+    assert config.servers[0].name == "demo"

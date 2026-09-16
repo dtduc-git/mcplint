@@ -26,6 +26,7 @@ HOME_CONFIGS: list[tuple[str, str]] = [
     (f"~/.config/Cursor/{CLINE_CONFIG}", "cline"),
     (f"~/AppData/Roaming/Code/{CLINE_CONFIG}", "cline"),
     (f"~/AppData/Roaming/Cursor/{CLINE_CONFIG}", "cline"),
+    ("~/.cline/data/settings/cline_mcp_settings.json", "cline"),
     ("~/.codeium/windsurf/mcp_config.json", "windsurf"),
     ("~/.codex/config.toml", "codex"),
     ("~/.gemini/settings.json", "gemini"),
