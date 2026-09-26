@@ -257,9 +257,7 @@ def test_plugin_manifest_shapes(tmp_path: Path, monkeypatch) -> None:
     home_c = tmp_path / "c"
     install_c = cache_config(home_c)
     (home_c / ".claude" / "plugins" / "installed_plugins.json").write_text(
-        json.dumps(
-            {"version": 1, "plugins": {"tool@acme": {"installPath": str(install_c)}}}
-        ),
+        json.dumps({"version": 1, "plugins": {"tool@acme": {"installPath": str(install_c)}}}),
         encoding="utf-8",
     )
     assert any("cache/acme/tool/2.0.0/.mcp.json" in path for path in run(home_c))

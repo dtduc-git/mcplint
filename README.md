@@ -79,7 +79,7 @@ the `mcplint` plugin (a skill that runs the pinned scanner):
 ```
 
 The plugin is skill-only: it runs no code of its own and instructs Claude to
-invoke `uvx --from mcplint-sec==0.4.1 mcplint …` locally — same offline
+invoke `uvx --from mcplint-sec==0.5.0 mcplint …` locally — same offline
 guarantees as the CLI.
 
 ## What it scans
@@ -242,7 +242,7 @@ permissions:
 
 steps:
   - uses: actions/checkout@v4
-  - uses: dtduc-git/mcplint@v0.4.1
+  - uses: dtduc-git/mcplint@v0.5.0
     with:
       fail-on: high
 ```

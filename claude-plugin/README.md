@@ -1,6 +1,7 @@
 # mcplint plugin for Claude Code
 
-Audit the MCP configuration in a project or on your machine without sending
+Audit the MCP configuration in a project or on your machine — including the
+MCP servers and skills of installed Claude Code plugins — without sending
 anything off the machine. This plugin bundles one skill that teaches Claude
 Code how to run [mcplint](https://github.com/dtduc-git/mcplint), the
 local-first security scanner for MCP client configs: OWASP MCP Top 10 rules, a
@@ -14,7 +15,7 @@ lockfile for drift detection, and a CycloneDX AIBOM export.
 ## What it runs and connects to
 
 - The plugin itself runs no code. The skill only tells Claude to invoke
-  `uvx --from mcplint-sec==0.4.1 mcplint …` on your machine. The `uv` tool
+  `uvx --from mcplint-sec==0.5.0 mcplint …` on your machine. The `uv` tool
   downloads that pinned package from PyPI the first time it runs.
 - mcplint only reads configuration files, locally, to extract MCP server
   definitions and to flag secrets hardcoded in them. It never executes or
@@ -29,8 +30,8 @@ lockfile for drift detection, and a CycloneDX AIBOM export.
 ## Requirements
 
 - `uv` available on `PATH` (https://docs.astral.sh/uv/). Without it, install
-  mcplint with `pip install mcplint-sec==0.4.1` and replace `uvx --from
-  mcplint-sec==0.4.1 mcplint` with `mcplint`.
+  mcplint with `pip install mcplint-sec==0.5.0` and replace `uvx --from
+  mcplint-sec==0.5.0 mcplint` with `mcplint`.
 
 ## License
 

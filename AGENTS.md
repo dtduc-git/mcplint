@@ -10,8 +10,19 @@ servers; no network unless `--online`.
 - PyPI: `mcplint-sec` (the command is `mcplint`)
 - Install: `uvx mcplint-sec scan`
 
-## Current state (2026-09-23)
+## Current state (2026-09-26)
 
+- **v0.5.0 — installed-plugin scanning + Claude Code plugin packaging.**
+  `--home` also scans installed Claude Code plugins: cache versions via
+  `installed_plugins.json` installPath (orphans skipped), `synced/` + `local/`
+  walked, `marketplaces/` never, inline `mcpServers` in
+  `.claude-plugin/plugin.json`, plugin top-level fixture dirs skipped,
+  instruction cap 500. The repo also ships a skill-only Claude Code plugin +
+  marketplace (`claude-plugin/`) submitted to the Anthropic directory. Release
+  bumps must update the plugin `version` and the `uvx --from
+  mcplint-sec==X.Y.Z` pins in `claude-plugin/` (done here). Repos carrying a
+  plugin manifest get it scanned too, so their lockfiles/AIBOM output can
+  change after upgrading — regenerate with `lock`.
 - **v0.4.1 — GATE008 false-positive fix.** The v0.4.0 probe flagged any 2xx on
   a fabricated session id, including JSON-RPC errors and empty tools lists.
   GATE008 now sends `tools/list` twice (no session header as a negative control,
