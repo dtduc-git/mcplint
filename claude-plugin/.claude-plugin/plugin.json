@@ -1,0 +1,15 @@
+{
+  "name": "mcplint",
+  "displayName": "mcplint — MCP config security scanner",
+  "version": "0.4.1",
+  "description": "Audit MCP client configs for OWASP MCP Top 10 risks, detect MCP server drift, and export an MCP AIBOM — offline, static, never executes MCP servers.",
+  "author": {
+    "name": "Duke - Duc Dinh",
+    "email": "dtduc.contact@gmail.com",
+    "url": "https://github.com/dtduc-git/mcplint"
+  },
+  "homepage": "https://github.com/dtduc-git/mcplint",
+  "repository": "https://github.com/dtduc-git/mcplint",
+  "license": "Apache-2.0",
+  "keywords": ["mcp", "security", "scanner", "owasp", "aibom", "supply-chain"]
+}

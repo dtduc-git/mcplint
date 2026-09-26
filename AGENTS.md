@@ -54,7 +54,11 @@ servers; no network unless `--online`.
   services (April 2026). Blog: `blog/2026-09-21-gateway-auth-is-not-session-auth.md`.
 - Older: **v0.1.1 released** (see below). Publishing is automated around
   `release.yml` (trusted publishing): bump `src/mcplint/__init__.py`, commit,
-  `git tag vX.Y.Z`, push.
+  `git tag vX.Y.Z`, push. In the same release also bump
+  `claude-plugin/.claude-plugin/plugin.json` `version` and the
+  `uvx --from mcplint-sec==X.Y.Z` pin in
+  `claude-plugin/skills/mcplint-scan/SKILL.md` (installed plugins update by
+  the manifest version).
 - CI (`.github/workflows/ci.yml`): ruff + pytest + self-scan on fixtures.
 - Research dataset: `research/state-of-mcp-configs.md` (1,210 public configs
   from 1,197 repos, 56.5% with findings). Regenerate with

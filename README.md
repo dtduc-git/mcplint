@@ -68,6 +68,20 @@ uvx mcplint-sec init
 Exit code is `1` when a finding at `--fail-on` severity (default `high`)
 exists — drop it into CI as-is.
 
+## Use inside Claude Code
+
+This repo is also a Claude Code plugin marketplace. Add it once, then install
+the `mcplint` plugin (a skill that runs the pinned scanner):
+
+```
+/plugin marketplace add dtduc-git/mcplint
+/plugin install mcplint@mcplint
+```
+
+The plugin is skill-only: it runs no code of its own and instructs Claude to
+invoke `uvx --from mcplint-sec==0.4.1 mcplint …` locally — same offline
+guarantees as the CLI.
+
 ## What it scans
 
 | Input | Examples |
