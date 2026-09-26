@@ -10,6 +10,9 @@
   },
   "homepage": "https://github.com/dtduc-git/mcplint",
   "repository": "https://github.com/dtduc-git/mcplint",
+  "documentationUrl": "https://github.com/dtduc-git/mcplint#readme",
+  "privacyPolicyUrl": "https://github.com/dtduc-git/mcplint/blob/master/PRIVACY.md",
+  "supportUrl": "https://github.com/dtduc-git/mcplint/issues",
   "license": "Apache-2.0",
   "keywords": ["mcp", "security", "scanner", "owasp", "aibom", "supply-chain"]
 }

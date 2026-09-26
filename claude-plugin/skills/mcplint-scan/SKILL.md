@@ -11,6 +11,10 @@ Invoke mcplint through the pinned distribution; do not `pip install` it:
 uvx --from mcplint-sec==0.4.1 mcplint <command>
 ```
 
+If `uvx` is unavailable (for example in a hosted sandbox), fall back to
+`pip install mcplint-sec==0.4.1` and run `mcplint` directly. If neither works,
+tell the user this skill needs a machine where the CLI can run.
+
 mcplint reads configuration files only. It never executes or contacts MCP
 servers. The scan itself sends nothing; `uvx` fetches the pinned package from
 PyPI on the first run. Online checks (OSV lookups) are off by default — but a
