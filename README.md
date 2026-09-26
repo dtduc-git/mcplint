@@ -87,10 +87,17 @@ guarantees as the CLI.
 | Input | Examples |
 | --- | --- |
 | MCP configs | `.mcp.json`, `mcp.json`, `.cursor/mcp.json`, `.vscode/mcp.json`, `opencode.json[c]`, `.codex/config.toml`, `cline_mcp_settings.json`, `~/.claude.json`, `~/.codeium/windsurf/mcp_config.json`, `~/.gemini/settings.json` |
+| Installed Claude Code plugins (`--home`) | MCP configs (`.mcp.json`, inline `mcpServers` in `.claude-plugin/plugin.json`) and skills from the active installs in `~/.claude/plugins/installed_plugins.json`, plus `synced/` and `local/`. Not walked directly: the `marketplaces/` tree (only manifest-listed installs are scanned); orphaned cache versions (`.orphaned_at`) are skipped. For cache installs, the plugin's own top-level `tests`, `test`, `fixtures`, `examples`, `example`, `docs` directories are skipped — content deeper inside the plugin (a skill named `docs`, for example) is still scanned |
 | Instruction / skill files | `SKILL.md`, `AGENTS.md`, `CLAUDE.md`, `.cursorrules`, `.windsurfrules`, `.github/copilot-instructions.md`, `.cursor/rules/*.mdc` |
 
+`mcpServers` declared as a file path inside `plugin.json` (`"./config/servers.json"`)
+is not followed yet — only inline objects and `.mcp.json` files are scanned.
+
 Scans recurse into subdirectories (`node_modules`, virtualenvs and build
-outputs are skipped), so monorepos work out of the box.
+outputs are skipped), so monorepos work out of the box. `.claude-plugin/plugin.json`
+is scanned in repository scans too (inline `mcpServers` is part of a plugin's MCP
+surface), so `lock` and `inventory` output can change for repos that ship a plugin
+manifest — regenerate the lockfile after upgrading.
 
 ## Rules
 

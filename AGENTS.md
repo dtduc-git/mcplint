@@ -52,6 +52,22 @@ servers; no network unless `--online`.
   injection); Wiz scan of 3,074 public LiteLLM instances → 9.6% accepted the
   default master key `sk-1234` or no auth; Censys: 12,500+ internet-facing MCP
   services (April 2026). Blog: `blog/2026-09-21-gateway-auth-is-not-session-auth.md`.
+- `--home` also scans installed Claude Code plugins for MCP configs
+  (`.mcp.json`, inline `mcpServers` in `.claude-plugin/plugin.json`) and
+  skills. The cache is read through `installed_plugins.json` installPath
+  entries (absolute paths only; orphaned versions carry `.orphaned_at` and stay
+  out, including in the walk-the-cache fallback when the manifest is
+  unreadable); `synced/` and `local/` are walked directly; the `marketplaces/`
+  tree is never walked (only manifest-listed installs are). In cache installs,
+  the plugin's own top-level `tests|test|fixtures|examples|example|docs` dirs
+  are skipped (root-only: `skills/docs/` is still scanned). Plugin content
+  walks after the user's own skill globs so
+  `~/.claude/skills` keeps the instruction budget first (cap raised to 500;
+  exceeding a cap is still silent — worth a warning someday).
+- `.claude-plugin/plugin.json` is also a config candidate in repo scans
+  (inline `mcpServers`); `parse_config_file` returns None without server keys,
+  so plain plugin manifests are ignored. `mcpServers` as a file path inside
+  plugin.json is not resolved yet (documented in README).
 - Older: **v0.1.1 released** (see below). Publishing is automated around
   `release.yml` (trusted publishing): bump `src/mcplint/__init__.py`, commit,
   `git tag vX.Y.Z`, push. In the same release also bump
