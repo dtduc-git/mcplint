@@ -1,6 +1,6 @@
 ---
 name: mcplint-scan
-description: Audit MCP client configurations (.mcp.json, ~/.claude.json, Cursor/Windsurf/VS Code mcp.json and similar) for OWASP MCP Top 10 risks with mcplint — offline, static, and it never executes MCP servers. Use when asked to scan, audit, or review an MCP setup; check MCP config security or supply-chain risk; detect drift between MCP server definitions and the lockfile; or produce an AIBOM of MCP servers in a project.
+description: Audit MCP client configurations (.mcp.json, Cursor/Windsurf/VS Code mcp.json and similar, plus user-level client configs) for OWASP MCP Top 10 risks with mcplint — offline, static, and it never executes MCP servers. Use when asked to scan, audit, or review an MCP setup; check MCP config security or supply-chain risk; detect drift between MCP server definitions and the lockfile; or produce an AIBOM of MCP servers in a project.
 ---
 
 # mcplint — MCP config security
@@ -26,6 +26,12 @@ uvx --from mcplint-sec==0.4.1 mcplint scan           # current directory
 uvx --from mcplint-sec==0.4.1 mcplint scan --home    # also user-level client configs
 uvx --from mcplint-sec==0.4.1 mcplint scan --json    # machine-readable output
 ```
+
+`--home` also reads the user-level config files of the MCP clients on the
+machine. Those files can contain tokens for other services; mcplint reads only
+their MCP server definitions (and flags hardcoded secrets), never uses those
+credentials, and never sends file contents anywhere. Run `--home` only when
+the user asks for the machine-wide scan.
 
 Exit codes: 0 clean, 1 findings at or above the failure threshold (default
 `high`), 2 usage error. Report findings grouped by rule id (MCP001, MCP002, …)

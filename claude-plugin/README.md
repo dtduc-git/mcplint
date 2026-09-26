@@ -16,11 +16,14 @@ lockfile for drift detection, and a CycloneDX AIBOM export.
 - The plugin itself runs no code. The skill only tells Claude to invoke
   `uvx --from mcplint-sec==0.4.1 mcplint …` on your machine. The `uv` tool
   downloads that pinned package from PyPI the first time it runs.
-- mcplint only reads configuration files. It never executes or contacts MCP
-  servers. Online checks (OSV CVE lookups) are off by default, but a
-  repository-level `.mcplint.yaml` with `online: true` enables them; the skill
-  asks before running in that case. When enabled, OSV lookups send MCP package
-  names and versions to `https://api.osv.dev`.
+- mcplint only reads configuration files, locally, to extract MCP server
+  definitions and to flag secrets hardcoded in them. It never executes or
+  contacts MCP servers, never uses credentials to authenticate anywhere, and
+  never transmits file contents.
+- Online checks (OSV CVE lookups) are off by default, but a repository-level
+  `.mcplint.yaml` with `online: true` enables them; the skill asks before
+  running in that case. When enabled, OSV lookups send MCP package names and
+  versions to `https://api.osv.dev` — nothing else.
 - No telemetry, no accounts, no hosted service.
 
 ## Requirements
