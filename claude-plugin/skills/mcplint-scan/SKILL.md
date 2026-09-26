@@ -5,7 +5,7 @@ description: Audit MCP client configurations (.mcp.json, Cursor/Windsurf/VS Code
 
 # mcplint — MCP config security
 
-Invoke mcplint through the pinned distribution; do not `pip install` it:
+Invoke mcplint through the pinned distribution (never an unpinned one):
 
 ```bash
 uvx --from mcplint-sec==0.4.1 mcplint <command>
